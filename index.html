@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flood Exposure Atlas | Alder Coast</title><meta name="description" content="Explore a fictional flood scenario and see how public facilities intersect with modeled exposure zones."><link rel="stylesheet" href="./style.css"></head>
+<body>
+<header class="mast"><div class="brand"><span class="mark" aria-hidden="true">≋</span>Alder Coast <span class="brand-sub">/ Field atlas</span></div><span class="sample">Fictional study area</span></header>
+<main>
+<div class="intro"><div><h1>Flood Exposure Atlas</h1><p>See which public facilities intersect with the flood scenario.</p></div><button id="export" class="primary">Download GeoJSON</button></div>
+<div class="atlas">
+<section class="sheet" aria-label="Map and exposure legend">
+<div class="mapbar"><strong>Lower Alder watershed</strong><label class="scenario">Flood scenario <select id="scenario"><option value="baseline">Baseline</option><option value="expanded">Expanded extent</option></select></label></div>
+<div class="map-wrap">
+<svg id="map" role="img" aria-labelledby="map-title" viewBox="0 0 1000 680"><title id="map-title">Fictional Lower Alder watershed map. Select a facility in the list to locate it.</title></svg>
+<div class="zoom" aria-label="Map zoom"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="reset" aria-label="Reset map view">↺</button></div>
+</div>
+<div class="legend"><strong>Exposure</strong><span><i class="sw high"></i>High</span><span><i class="sw moderate"></i>Moderate</span><span><i class="sw low"></i>Low</span><span><i class="sw outside"></i>Outside</span></div>
+</section>
+<aside class="rail" aria-label="Facility explorer">
+<div class="rail-head"><div class="rail-title"><h2>Facilities</h2><span id="count" role="status"></span></div>
+<label class="filter">Exposure level <select id="filter"><option value="all">All levels</option><option value="high">High</option><option value="moderate">Moderate</option><option value="low">Low</option><option value="outside">Outside</option></select></label>
+<label class="layers"><input id="zones" type="checkbox" checked> Show flood zones</label></div>
+<p id="scenario-note" class="scenario-note" role="status"></p><div id="facilities" class="list" aria-label="Matching facilities"></div>
+<div class="detail" id="detail" aria-live="polite"></div>
+</aside>
+</div>
+<footer>Illustrative dataset. This map is a portfolio demo and must not be used for planning or emergency decisions.</footer>
+</main><script type="module" src="./app.mjs"></script>
+</body></html>

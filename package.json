@@ -1,0 +1,1 @@
+{"name":"flood-exposure-atlas","private":true,"type":"module","scripts":{"start":"node serve.mjs","test":"node --test","analyze":"node analyze.mjs","benchmark":"node benchmark.mjs"},"engines":{"node":">=22"}}
