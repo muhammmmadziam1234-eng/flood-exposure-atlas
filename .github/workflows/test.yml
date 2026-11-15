@@ -5,9 +5,10 @@ on:
 permissions:
   contents: read
 jobs:
-  test:
+  unit:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node: [22, 24]
     steps:
@@ -15,4 +16,49 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
-      - run: npm test
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Unit tests with the 90% line-coverage gate for geo.mjs and validate.mjs
+        run: npm run test:coverage
+      - name: Quick benchmark (checks that the grid and the direct scan agree)
+        run: npm run benchmark
+      - run: npm audit --omit=dev
+  e2e:
+    runs-on: ubuntu-latest
+    env:
+      CHROME_PATH: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Browser tests (import, export, URL state, keyboard, 360 px, axe-core)
+        run: npm run e2e
+  crosscheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: validation/requirements.txt
+      - run: pip install -r validation/requirements.txt
+      - name: Compare the engine with Shapely (fails on any disagreement or fewer than 200,000 pairs)
+        run: python validation/crosscheck.py --out "$RUNNER_TEMP/crosscheck.json"
+      - name: Assert the report
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          report = json.load(open(os.path.join(os.environ['RUNNER_TEMP'], 'crosscheck.json')))
+          print('pairs', report['pairs'], 'boundary', report['boundary_cases'], 'disagreements', report['disagreements'])
+          sys.exit(0 if report['disagreements'] == 0 and report['pairs'] >= 200000 else 1)
+          PY
+      - name: Confirm the cross-check can fail (broken copies of the engine must be caught)
+        run: python validation/mutants.py
