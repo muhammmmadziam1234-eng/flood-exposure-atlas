@@ -50,6 +50,11 @@ footer { padding-top: 13px; color: #4a6055; font-size: 13px; }
 .problems h3 { font-size: 16px; color: #7a2610; }
 .problems p { font-size: 13px; margin-top: 3px; }
 .problem-scroll { max-height: 220px; overflow: auto; margin-top: 8px; background: #fff; border: 1px solid #e2cfc4; }
+.scroll-hint { display: none; font-size: 12px; color: #4a6055; }
+.problem-scroll table { min-width: 560px; }
+.problem-scroll th, .problem-scroll td { overflow-wrap: normal; }
+.problem-scroll th:nth-child(-n+3), .problem-scroll td:nth-child(-n+3) { white-space: nowrap; }
+.problem-scroll td:last-child { min-width: 260px; overflow-wrap: anywhere; }
 
 /* Tables (problems and comparison) */
 table { border-collapse: collapse; width: 100%; font-size: 13px; }
@@ -67,6 +72,7 @@ th { background: #edf2e7; font-weight: 650; }
 .map-note { padding: 0 14px 9px; font-size: 12px; color: #4a6055; }
 .map-note[hidden] { display: none; }
 .map-wrap { position: relative; background: #174c5e; }
+.map-wrap.plain { background: #e9efe8; }
 #map { width: 100%; height: auto; display: block; }
 .zoom { position: absolute; top: 12px; left: 12px; display: grid; gap: 3px; }
 .zoom button { width: 34px; height: 34px; border: 1px solid #b4c3b6; border-radius: 3px; background: #fff; color: #193b38; font-weight: 750; font-size: 18px; }
@@ -158,6 +164,7 @@ th { background: #edf2e7; font-weight: 650; }
   .drops, .compare-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 510px) {
+  .scroll-hint { display: block; }
   .intro { align-items: start; flex-direction: column; }
   .brand-sub { display: none; }
   .mast { height: 54px; }

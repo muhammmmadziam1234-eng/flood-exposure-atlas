@@ -1,0 +1,80 @@
+{
+  "tool": "axe-core",
+  "axe": "4.14.0",
+  "views": [
+    {
+      "view": "default view",
+      "viewport": "1280x900",
+      "violations": 0,
+      "rulesPassed": 43,
+      "needsReview": [
+        "color-contrast",
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "view": "expanded scenario, high filter, one facility selected",
+      "viewport": "1280x900",
+      "violations": 0,
+      "rulesPassed": 42,
+      "needsReview": [
+        "color-contrast",
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "view": "rejected-features panel",
+      "viewport": "1280x900",
+      "violations": 0,
+      "rulesPassed": 42,
+      "needsReview": [
+        "color-contrast",
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "view": "default view",
+      "viewport": "360x800",
+      "violations": 0,
+      "rulesPassed": 43,
+      "needsReview": [
+        "color-contrast",
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "view": "rejected-features panel",
+      "viewport": "360x800",
+      "violations": 0,
+      "rulesPassed": 43,
+      "needsReview": [
+        "color-contrast",
+        "label-content-name-mismatch"
+      ]
+    }
+  ],
+  "contrast": {
+    "viewport_1280": {
+      "textItemsMeasured": 97,
+      "lowestRatio": 5.73,
+      "lowestIs": "small \"Test\""
+    },
+    "viewport_360": {
+      "textItemsMeasured": 97,
+      "lowestRatio": 5.73,
+      "lowestIs": "small \"Test\""
+    }
+  },
+  "targets": {
+    "viewport_1280": {
+      "controlsMeasured": 55,
+      "smallestWidth": 24,
+      "smallestHeight": 24
+    },
+    "viewport_360": {
+      "controlsMeasured": 55,
+      "smallestWidth": 24,
+      "smallestHeight": 24
+    }
+  }
+}

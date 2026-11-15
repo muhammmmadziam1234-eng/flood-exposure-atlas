@@ -266,6 +266,7 @@ function applyDataset() {
   const imported = !data.artwork;
   for (const group of [below, above]) /** @type {SVGElement} */ (group).style.display = imported ? 'none' : '';
   /** @type {SVGElement} */ (plain).style.display = imported ? '' : 'none';
+  map.parentElement?.classList.toggle('plain', imported);
   const {facilities, zones} = data.source;
   $('source-badge').textContent = !imported ? 'Fictional study area' : facilities === 'imported' && zones === 'imported' ? 'Imported facilities and zones' :
     facilities === 'imported' ? 'Imported facilities, sample zones' : 'Sample facilities, imported zones';
