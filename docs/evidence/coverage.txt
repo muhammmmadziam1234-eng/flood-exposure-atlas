@@ -1,0 +1,13 @@
+Unit-test coverage from Node's built-in test runner (node --test --experimental-test-coverage).
+Recorded with: npm run test:coverage -- --write
+Node v22.23.4
+Gate: line coverage of geo.mjs and validate.mjs must each be at least 90%.
+
+-------------------------------------------------------------
+file         | line % | branch % | funcs % | uncovered lines
+-------------------------------------------------------------
+geo.mjs      | 100.00 |    97.40 |  100.00 |
+validate.mjs | 100.00 |    95.62 |  100.00 |
+-------------------------------------------------------------
+all files    | 100.00 |    96.26 |  100.00 |
+-------------------------------------------------------------
