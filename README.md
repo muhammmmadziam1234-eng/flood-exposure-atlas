@@ -33,6 +33,7 @@ The checks below need `npm ci`, which installs only development tools (TypeScrip
 npm run typecheck                                # tsc --noEmit, strict, checkJs
 npm run test:coverage                            # unit tests; fails under 90% of lines for geo.mjs and validate.mjs
 CHROME_PATH=/usr/bin/google-chrome npm run e2e   # browser tests; any Chrome or Chromium executable works
+                                                 # (WRITE_EVIDENCE=1 also rewrites docs/evidence/accessibility.json)
 npm run benchmark -- --large                     # the recorded benchmark (rewrites docs/evidence/benchmark.json)
 pip install -r validation/requirements.txt       # Python 3.12
 python validation/crosscheck.py                  # rewrites docs/evidence/crosscheck.json

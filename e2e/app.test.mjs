@@ -102,6 +102,7 @@ test('imported zones and facilities are checked, analysed in a worker and export
   assert.deepEqual(await page.locator('#counts tbody tr').evaluateAll(rows => rows.map(r => r.innerText.replace(/\s+/g, ' '))),
     ['High 3', 'Moderate 0', 'Low 1', 'Outside 2', 'All facilities 6']);
 
+  assert.ok(app.requests.every(url => url.startsWith(server.url)), 'importing makes no request outside the page origin: ' + app.requests.join(' '));
   const csv = await download(page, '#export-csv');
   assert.equal(csv.name, 'exposure-results.csv');
   assert.equal(csv.text, ['id,name,category,lon,lat,exposure,baseline_exposure,change,matched_zones',
