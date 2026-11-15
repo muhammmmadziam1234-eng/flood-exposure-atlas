@@ -25,6 +25,19 @@ The scenario stores facility points and zone polygons as [WGS 84 GeoJSON](https:
 
 This is fictional sample data, not a flood forecast or a real-world risk assessment. The app has no map tile dependencies or external services. Headings use Georgia where it is installed and the bundled Gelasio, an open typeface with Georgia's letter widths, everywhere else.
 
+## Spatial rules
+
+These are the exact rules in `geo.mjs`, and the tests in `test/geo.property.test.mjs` check them on seeded random scenes.
+
+- The test is planar: longitude is x and latitude is y. There is no geodesic maths and no antimeridian handling.
+- A point on a polygon boundary is covered: any vertex, and any point of an edge of the outer ring or of a hole.
+- A point strictly inside a hole is not covered.
+- A MultiPolygon covers a point when any one of its parts covers it.
+- A facility's exposure is the highest level among the zones that cover it. Every covering zone is listed, highest level first, then by name.
+- "On an edge" means the cross product with the edge is under 1e-12 and the point lies inside the edge's bounding box. That is exact for integer coordinates. For other values it is a tolerance of about 1e-12 divided by the edge length, in degrees.
+- The grid index only shortlists zones. A zone with an unusable bounding box (very wide, empty or not finite) is never gridded and stays a candidate everywhere, so the index cannot drop a zone that a direct scan would find.
+- A zone with an unknown level or no name stops the analysis with a clear error. Rings are treated as closed whether or not they repeat their first position.
+
 ## Publish the demo
 
 The static files at the repository root can be served by GitHub Pages. In repository Settings → Pages, choose the main branch and the root folder as the source.
