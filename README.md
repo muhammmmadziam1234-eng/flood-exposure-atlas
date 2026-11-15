@@ -1,5 +1,7 @@
 # Flood Exposure Atlas
 
+[![Tests](https://github.com/muhammmmadziam1234-eng/flood-exposure-atlas/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/muhammmmadziam1234-eng/flood-exposure-atlas/actions/workflows/test.yml)
+
 A browser map and reproducible spatial analysis for a fictional coastal flood scenario. The map classifies 16 sample facilities against overlapping exposure polygons, then lets you inspect, filter, and export the results.
 
 ![Flood Exposure Atlas screenshot](docs/preview.png)
