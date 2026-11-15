@@ -151,7 +151,16 @@ export function compare(sites, baselineZones, alternativeZones, {onProgress} = {
   const half = (/** @type {number} */ pass) => onProgress &&
     ((/** @type {number} */ done, /** @type {number} */ total) => onProgress(pass * total + done, 2 * total));
   const baseline = analyze(sites, baselineZones, {onProgress: half(0)});
-  const alternative = analyze(sites, alternativeZones, {onProgress: half(1)});
+  return withChange(baseline, analyze(sites, alternativeZones, {onProgress: half(1)}));
+}
+
+/**
+ * Attach the baseline exposure and the signed change in severity (alternative minus baseline) to the alternative results.
+ * @param {Collection<Result>} baseline results for the baseline zones
+ * @param {Collection<Result>} alternative results for the alternative zones, for the same sites in the same order
+ * @returns {Collection<Result>}
+ */
+export function withChange(baseline, alternative) {
   return {type: 'FeatureCollection', features: alternative.features.map((f, i) => {
     const baselineExposure = baseline.features[i].properties.exposure;
     return {...f, properties: {...f.properties, baselineExposure,
