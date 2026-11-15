@@ -1,7 +1,7 @@
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.woff2':'font/woff2'};
-const assets=new Set(['index.html','style.css','app.mjs','geo.mjs','scenario.mjs','fonts/gelasio-bold.woff2']);
+const assets=new Set(['index.html','style.css','app.mjs','geo.mjs','scenario.mjs','validate.mjs','codec.mjs','view.mjs','job.mjs','worker.mjs','fonts/gelasio-bold.woff2']);
 createServer(async (req,res)=>{
   if (req.method!=='GET'&&req.method!=='HEAD') {res.writeHead(405,{Allow:'GET, HEAD'}).end();return;}
   let name;

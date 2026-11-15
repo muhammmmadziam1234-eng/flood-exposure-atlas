@@ -46,3 +46,18 @@ test('only listed files are served, and only by GET or HEAD',async t=>{
   assert.match(post,/^HTTP\/1\.1 405/);
   assert.match(post,/Allow: GET, HEAD/i);
 });
+test('every module that the page and the worker import is served', async t => {
+  const port = await start(t), root = 'http://127.0.0.1:' + port;
+  const seen = new Set(), queue = ['app.mjs'];
+  while (queue.length) {
+    const name = queue.pop();
+    if (seen.has(name)) continue;
+    seen.add(name);
+    const response = await fetch(root + '/' + name);
+    assert.equal(response.status, 200, name + ' is imported but not served');
+    assert.match(response.headers.get('content-type'), /^text\/javascript/, name);
+    const source = await response.text();
+    for (const [, target] of source.matchAll(/(?:from '|new URL\(')\.\/([\w.-]+\.mjs)'/g)) queue.push(target);
+  }
+  for (const expected of ['app.mjs', 'geo.mjs', 'scenario.mjs', 'validate.mjs', 'codec.mjs', 'view.mjs', 'worker.mjs', 'job.mjs']) assert.ok(seen.has(expected), expected + ' was not reached: ' + [...seen]);
+});
