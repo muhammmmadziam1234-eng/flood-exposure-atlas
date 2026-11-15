@@ -81,14 +81,17 @@ function bounds({type, coordinates}) {
  * Grid lookups select candidates only; the polygon test makes the final decision. A zone whose bounding box is
  * very wide, empty or not made of finite numbers is never gridded: it stays a candidate for every point, so the
  * grid can only ever shortlist more zones than needed, never fewer.
- * @param {{geometry: ZoneGeometry}[]} zones
+ * @template {{geometry: ZoneGeometry}} T
+ * @param {T[]} zones
  * @param {number} [step] Cell size in degrees.
- * @returns {(point: Position) => any[]}
+ * @returns {(point: Position) => T[]}
  */
 export function zoneIndex(zones, step = .006) {
   if (!Number.isFinite(step) || step <= 0) throw new RangeError('Grid step must be positive.');
-  /** @type {Map<string, any[]>} */
-  const cells = new Map(), broad = [];
+  /** @type {Map<string, T[]>} */
+  const cells = new Map();
+  /** @type {T[]} */
+  const broad = [];
   const tile = (/** @type {number} */ n) => Math.floor(n / step);
   for (const zone of zones) {
     const [west, south, east, north] = bounds(zone.geometry).map(tile);

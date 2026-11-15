@@ -7,13 +7,15 @@
     "test": "node --test \"test/*.test.mjs\"",
     "analyze": "node analyze.mjs",
     "benchmark": "node benchmark.mjs",
-    "e2e": "node --test --test-timeout=240000 \"e2e/*.test.mjs\""
+    "e2e": "node --test --test-timeout=240000 \"e2e/*.test.mjs\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "engines": {
     "node": ">=22"
   },
   "devDependencies": {
     "axe-core": "4.14.0",
-    "playwright-core": "1.65.1"
+    "playwright-core": "1.65.1",
+    "typescript": "7.0.2"
   }
 }

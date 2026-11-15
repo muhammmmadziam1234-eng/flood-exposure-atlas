@@ -141,6 +141,7 @@ function validateLayer(input, checkFeature) {
   if (!isObject(input)) return refuse('(file)', 'Expected a GeoJSON FeatureCollection object, found ' + found(input) + '.');
   if (input.type !== 'FeatureCollection') return refuse('type', 'Expected "FeatureCollection", found ' + found(input.type) + '.');
   if (!Array.isArray(input.features)) return refuse('features', '"features" must be an array.');
+  /** @type {any[]} */
   const list = input.features;
   if (list.length > LIMITS.maxFeatures) {
     return refuse('features', 'The file has ' + number(list.length) + ' features; the limit is ' + number(LIMITS.maxFeatures) +
