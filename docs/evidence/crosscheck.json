@@ -1,0 +1,44 @@
+{
+  "seed": 20261115,
+  "script": "validation/crosscheck.py",
+  "versions": {
+    "python": "3.12.3",
+    "shapely": "2.2.0",
+    "geos": "3.14.1",
+    "numpy": "2.5.4",
+    "node": "v22.23.4"
+  },
+  "reference": "shapely.covers(polygon, point): boundary counts as covered, hole interiors do not",
+  "engine_paths": {
+    "contains": "geo.mjs contains()",
+    "analyze": "geo.mjs analyze() with its default grid index",
+    "grid": "geo.mjs zoneIndex() with a per-case cell size, then contains()"
+  },
+  "float_boundary_margin_degrees": 1e-07,
+  "cases": {
+    "convex": 400,
+    "concave": 400,
+    "holes": 400,
+    "multi": 300,
+    "float": 300
+  },
+  "polygons": 1800,
+  "pairs": 760667,
+  "pairs_by_kind": {
+    "convex": 143782,
+    "concave": 117128,
+    "holes": 147198,
+    "multi": 312708,
+    "float": 39851
+  },
+  "covered_pairs": 229744,
+  "boundary_cases": 46117,
+  "hole_interior_pairs": 3345,
+  "disagreements": 0,
+  "disagreements_by_path": {
+    "contains": 0,
+    "analyze": 0,
+    "grid": 0
+  },
+  "first_disagreements": []
+}

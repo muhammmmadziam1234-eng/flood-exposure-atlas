@@ -1,0 +1,48 @@
+{
+  "script": "validation/mutants.py",
+  "cases_scale": 0.1,
+  "mutants": [
+    {
+      "mutant": "boundary points not covered",
+      "change": "return loc === 'edge' || (loc === 'inside'  ->  return (loc === 'inside'",
+      "pairs": 77126,
+      "disagreements": 3844,
+      "caught": true
+    },
+    {
+      "mutant": "holes ignored",
+      "change": "!holes.some(hole => ringLocation(point, hole) === 'inside')  ->  true",
+      "pairs": 77126,
+      "disagreements": 370,
+      "caught": true
+    },
+    {
+      "mutant": "only the first part of a MultiPolygon is tested",
+      "change": "polygons.some(([outer  ->  polygons.slice(0, 1).some(([outer",
+      "pairs": 77126,
+      "disagreements": 5012,
+      "caught": true
+    },
+    {
+      "mutant": "edge test ignores the segment bounds",
+      "change": "x >= Math.min(a, c) && x <= Math.max(a, c) && y >= Math.min(b, d) && y <= Math.max(b, d)  ->  true",
+      "pairs": 77126,
+      "disagreements": 54328,
+      "caught": true
+    },
+    {
+      "mutant": "grid leaves out the last column of cells",
+      "change": "for (let x = west; x <= east; x++)  ->  for (let x = west; x < east; x++)",
+      "pairs": 77126,
+      "disagreements": 1790,
+      "caught": true
+    },
+    {
+      "mutant": "edge tolerance widened to 1e-3",
+      "change": "< 1e-12  ->  < 1e-3",
+      "pairs": 77126,
+      "disagreements": 1169,
+      "caught": true
+    }
+  ]
+}
